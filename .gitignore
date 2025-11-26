@@ -1,0 +1,14 @@
+node_modules/
+__pycache__/
+*.pyc
+.env
+venv/
+.DS_Store
+dist/
+.gemini/
+teencare.db
+.idea/
+.vscode/
+coverage/
+build/
+*.log

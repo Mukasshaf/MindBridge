@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TeenCare Session Report</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        h1 { color: #2c3e50; }
+        .header { margin-bottom: 30px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .section { margin-bottom: 20px; }
+        .metric { display: flex; justify-content: space-between; margin-bottom: 5px; }
+        .label { font-weight: bold; }
+        .value { color: #555; }
+        .urgent { color: red; font-weight: bold; }
+        .monitor { color: orange; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>TeenCare Session Report</h1>
+        <p><strong>Session ID:</strong> {{ session.id }}</p>
+        <p><strong>Date:</strong> {{ session.created_at }}</p>
+        <p><strong>Participant ID:</strong> {{ session.participant_id }}</p>
+        <p><strong>Urgency:</strong> <span class="{{ session.urgency }}">{{ session.urgency|upper }}</span></p>
+    </div>
+
+    <div class="section">
+        <h2>Summary</h2>
+        {% if session.report %}
+            <div class="metric">
+                <span class="label">Stress Level:</span>
+                <span class="value">{{ session.report.stress_label }} ({{ "%.2f"|format(session.report.stress_score) }})</span>
+            </div>
+            <div class="metric">
+                <span class="label">Attention Score:</span>
+                <span class="value">{{ "%.1f"|format(session.report.attention_score) }}</span>
+            </div>
+            <div class="metric">
+                <span class="label">Impulsivity:</span>
+                <span class="value">{{ session.report.impulsivity }}</span>
+            </div>
+            <div class="metric">
+                <span class="label">Emotional Bias:</span>
+                <span class="value">{{ session.report.emotional_bias }}</span>
+            </div>
+        {% else %}
+            <p>No report generated yet.</p>
+        {% endif %}
+    </div>
+
+    {% if session.report and session.report.clinical_notes %}
+    <div class="section">
+        <h2>Intake Notes</h2>
+        <ul>
+            {% for key, value in session.report.clinical_notes.items() %}
+            <li><strong>{{ key|replace('_', ' ')|title }}:</strong> {{ value }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</body>
+</html>

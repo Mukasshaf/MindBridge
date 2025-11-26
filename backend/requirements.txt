@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+sqlmodel
+pydantic
+python-multipart
+jinja2
+weasyprint
+google-generativeai
+python-dotenv
