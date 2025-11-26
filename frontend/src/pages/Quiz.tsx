@@ -286,7 +286,7 @@ const Quiz = () => {
                         key={option.label}
                         onClick={() => handleDecision(option.type)}
                         variant="outline"
-                        className="w-full justify-start h-auto py-4 px-6 rounded-2xl text-left"
+                        className="w-full justify-start h-auto py-4 px-6 rounded-2xl text-left whitespace-normal break-words"
                       >
                         <span className="text-base">{option.label}</span>
                       </Button>
